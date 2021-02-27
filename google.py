@@ -4,11 +4,18 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
+
+# chrome_options.add_argument('--no-sandbox')
+# chrome_options.add_argument('--disable-dev-shm-usage')
+
 
 class GoogleKeywordScreenshooter:
 
     def __init__(self, keyword, screenshoots_dir):
-        self.browser = webdriver.Chrome(ChromeDriverManager().install())
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')  # 브라우저 안 뜨게 하는 옵션임.
+        self.browser = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
         self.keyword = keyword
         self.screenshoots_dir = screenshoots_dir
 
